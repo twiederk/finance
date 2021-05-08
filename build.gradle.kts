@@ -3,12 +3,15 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("org.springframework.boot") version "2.4.5"
+    id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("jvm") version "1.4.30"
+    kotlin("plugin.spring") version "1.4.30"
     id("org.jetbrains.compose") version "0.3.1"
 }
 
 group = "com.d20charactersheet.finance"
-version = "0.1.0"
+version = "0.2.0-SNAPSHOT"
 
 repositories {
     jcenter()
@@ -17,10 +20,17 @@ repositories {
 }
 
 dependencies {
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.assertj:assertj-core:3.19.0")
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation(compose.desktop.currentOs)
+    implementation("net.sf.ucanaccess:ucanaccess:5.0.1")
 }
 
 tasks.test {
