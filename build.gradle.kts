@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "0.2.0-SNAPSHOT"
+version = "0.2.0"
 
 repositories {
     jcenter()
