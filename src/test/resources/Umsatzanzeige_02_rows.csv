@@ -1,0 +1,15 @@
+Umsatzanzeige;Datei erstellt am: 12.05.2021 05:28
+
+IBAN;DE79 5001 0517 5421 4422 63
+Kontoname;Girokonto
+Bank;ING
+Kunde;Torsten Wiederkehr
+Zeitraum;12.04.2021 - 12.05.2021
+
+Sortierung;Datum absteigend
+
+In der CSV-Datei finden Sie alle bereits gebuchten Umsätze. Die vorgemerkten Umsätze werden nicht aufgenommen, auch wenn sie in Ihrem Internetbanking angezeigt werden.
+
+Buchung;Valuta;Auftraggeber/Empfänger;Buchungstext;Kategorie;Hashtag 1;Verwendungszweck;Betrag;Währung
+11.05.2021;11.05.2021;VISA ROSSMANN 3216;Lastschrift;Lebensmittel und Haushalt;erledigt;NR XXXX 0013 GROSSWALLST KAUFUMSATZ 08.05 124138 ARN74830721128319018498371 Google Pay;-13,99;EUR
+12.05.2021;12.05.2021;VISA GOOGLE *GOOGLE PLAY AP;Lastschrift;Shopping und Media;erledigt;NR XXXX 0013 G.CO/HELPPA IE KAUFUMSATZ 08.05 103439 ARN74313301128100074005962;-2,99;EUR

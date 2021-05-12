@@ -11,7 +11,8 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "0.2.0"
+version = "0.3.0-SNAPSHOT"
+
 
 repositories {
     jcenter()
@@ -24,6 +25,7 @@ dependencies {
     testImplementation("org.assertj:assertj-core:3.19.0")
     testImplementation(kotlin("test-junit5"))
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
 
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
@@ -43,7 +45,7 @@ tasks.withType<KotlinCompile> {
 
 compose.desktop {
     application {
-        mainClass = "MainKt"
+        mainClass = "FinanceApplicationKt"
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
             packageName = "finance"

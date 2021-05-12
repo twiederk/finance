@@ -9,7 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.d20charactersheet.finance.Categories
+import com.d20charactersheet.finance.domain.Categories
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 

@@ -1,4 +1,4 @@
-package com.d20charactersheet.finance
+package com.d20charactersheet.finance.domain
 
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
