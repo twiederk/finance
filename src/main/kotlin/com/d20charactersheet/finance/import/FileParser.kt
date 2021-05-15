@@ -1,17 +1,15 @@
 package com.d20charactersheet.finance.import
 
-import com.d20charactersheet.finance.domain.MoneyTransfer
-import com.d20charactersheet.finance.domain.MoneyTransfers
+import com.d20charactersheet.finance.domain.RawMoneyTransfer
 import java.io.File
 import kotlin.streams.toList
 
 class FileParser {
 
-    fun readMoneyTransfersFromFile(fileName: String): MoneyTransfers {
+    fun readMoneyTransfersFromFile(fileName: String): List<RawMoneyTransfer> {
         val linesInFile: List<String> = File(fileName).useLines { it.toList() }
         val startIndex = findStartIndexOfMoneyTransfers(linesInFile)
-        val moneyTransfers: List<MoneyTransfer> = importMoneyTransfers(linesInFile, startIndex)
-        return MoneyTransfers(moneyTransfers)
+        return importMoneyTransfers(linesInFile, startIndex)
     }
 
     private fun findStartIndexOfMoneyTransfers(linesInFile: List<String>): Long {
@@ -23,8 +21,8 @@ class FileParser {
         throw IllegalArgumentException("Can't find money transfers in file")
     }
 
-    private fun importMoneyTransfers(linesInFile: List<String>, startIndex: Long): List<MoneyTransfer> {
-        return linesInFile.stream().skip(startIndex).map { MoneyTransferParser().parseMoneyTransfer(it) }.toList()
+    private fun importMoneyTransfers(linesInFile: List<String>, startIndex: Long): List<RawMoneyTransfer> {
+        return linesInFile.stream().skip(startIndex).map { RawMoneyTransferParser().parseRawMoneyTransfer(it) }.toList()
     }
 
 }
