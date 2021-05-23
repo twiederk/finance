@@ -5,14 +5,14 @@ import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Component
 
 @Component
-class Categories(
+class PaymentInstruments(
     @Autowired private val template: JdbcTemplate
 ) {
 
-    val categories: List<Category> = template.query("SELECT Id, Kategorie FROM Kategorie") { rs, _ ->
-        Category(rs.getInt("id"), rs.getString("Kategorie"))
+    val paymentInstruments: List<PaymentInstrument> = template.query("SELECT Id, Name FROM Quelle") { rs, _ ->
+        PaymentInstrument(rs.getInt("id"), rs.getString("Name"))
     }.sortedBy { it.name.uppercase() }
 
-    fun numberOfCategories(): Int = categories.size
+    fun numberOfPaymentInstruments(): Int = paymentInstruments.size
 
 }

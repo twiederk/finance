@@ -21,8 +21,7 @@ class CategoriesDatabaseTest {
     }
 
     @Test
-    internal fun getCategories_alphabeticallyOrderedListOfAllCategories() {
-        // arrange
+    fun getCategories_alphabeticallyOrderedListOfAllCategories() {
 
         // act
         val categories = underTest.categories
