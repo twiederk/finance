@@ -1,8 +1,12 @@
 package com.d20charactersheet.finance
 
 import com.d20charactersheet.finance.domain.Categories
+import com.d20charactersheet.finance.domain.MoneyTransfer
 import com.d20charactersheet.finance.domain.PaymentInstruments
+import com.d20charactersheet.finance.domain.RawMoneyTransfer
 import com.d20charactersheet.finance.gui.MainWindow
+import com.d20charactersheet.finance.import.FileParser
+import com.d20charactersheet.finance.service.MoneyTransferService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -18,9 +22,17 @@ class FinanceApplication : CommandLineRunner {
     @Autowired
     private lateinit var paymentInstruments: PaymentInstruments
 
+    @Autowired
+    private lateinit var moneyTransferService: MoneyTransferService
+
     override fun run(vararg args: String?) {
-        MainWindow(categories, paymentInstruments)
+        val rawMoneyTransfers: List<RawMoneyTransfer> = FileParser().readMoneyTransfersFromFile(args)
+        val moneyTransfers: List<MoneyTransfer> = moneyTransferService.filterNewMoneyTransfers(rawMoneyTransfers)
+        moneyTransferService.suggestPaymentInstrument(moneyTransfers, paymentInstruments)
+        moneyTransferService.suggestCategory(moneyTransfers, categories)
+        MainWindow(moneyTransfers, moneyTransferService, categories, paymentInstruments)
     }
+
 }
 
 

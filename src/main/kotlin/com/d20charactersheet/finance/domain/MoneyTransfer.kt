@@ -5,9 +5,9 @@ data class MoneyTransfer(
     val valutaDate: ValutaDate,
     val recipient: Recipient,
     val amount: Amount,
-    val category: Category = EmptyCategory,
-    val comment: Comment = Comment(""),
-    val paymentInstrument: PaymentInstrument = EmptyPaymentInstrument
+    var category: Category = EmptyCategory,
+    var comment: Comment = Comment(""),
+    var paymentInstrument: PaymentInstrument = EmptyPaymentInstrument
 )
 
 data class Category(val id: Int, val name: String)

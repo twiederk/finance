@@ -15,4 +15,6 @@ class PaymentInstruments(
 
     fun numberOfPaymentInstruments(): Int = paymentInstruments.size
 
+    fun findPaymentInstrumentById(id: Int) = paymentInstruments.find { it.id == id }!!
+
 }

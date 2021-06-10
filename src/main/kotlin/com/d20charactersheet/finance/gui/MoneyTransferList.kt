@@ -5,9 +5,10 @@ package com.d20charactersheet.finance.gui
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -17,38 +18,44 @@ import androidx.compose.ui.unit.dp
 import com.d20charactersheet.finance.domain.Category
 import com.d20charactersheet.finance.domain.MoneyTransfer
 import com.d20charactersheet.finance.domain.PaymentInstrument
+import com.d20charactersheet.finance.service.MoneyTransferService
 
 
 @Composable
 fun MoneyTransferList(
     moneyTransfers: List<MoneyTransfer>,
+    moneyTransferService: MoneyTransferService,
     categories: List<Category>,
     paymentInstruments: List<PaymentInstrument>
 ) {
-    for (moneyTransfer in moneyTransfers) {
-        MoneyTransferRow(moneyTransfer, categories, paymentInstruments)
+    Column(
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(bottom = 80.dp)
+    ) {
+        for (moneyTransfer in moneyTransfers) {
+            MoneyTransferRow(moneyTransfer, moneyTransferService, categories, paymentInstruments)
+        }
     }
 }
 
 @Composable
 fun MoneyTransferRow(
     moneyTransfer: MoneyTransfer,
+    moneyTransferService: MoneyTransferService,
     categories: List<Category>,
     paymentInstruments: List<PaymentInstrument>
 ) {
     Row(Modifier.padding(start = 20.dp, end = 20.dp, bottom = 10.dp)) {
-        val viewModel = ViewModel(
-            mutableStateOf(moneyTransfer.paymentInstrument),
-            mutableStateOf(moneyTransfer.comment.text),
-            mutableStateOf(moneyTransfer.category)
-        )
+        val isSaved = remember { mutableStateOf(false) }
+        val viewModel = MoneyTransferViewModel(moneyTransfer, moneyTransferService)
 
         Text("${moneyTransfer.valutaDate}", Modifier.width(100.dp).alignByBaseline())
 
         PaymentInstrumentDropDown(viewModel, paymentInstruments)
 
         Text(
-            moneyTransfer.recipient.recipient,
+            moneyTransfer.recipient.name,
             Modifier.width(250.dp).alignByBaseline().padding(start = 20.dp, end = 20.dp)
         )
         Text(
@@ -60,40 +67,31 @@ fun MoneyTransferRow(
         CommentTextField(viewModel, Modifier.width(250.dp).alignByBaseline().padding(start = 20.dp, end = 20.dp))
         CategoryDropDown(viewModel, categories)
 
-        Button(
-            onClick = { printCommitData(viewModel) },
-            modifier = Modifier.width(150.dp).alignByBaseline().padding(start = 20.dp, end = 20.dp)
-        ) {
-            Text("Commit")
+        if (isSaved.value) {
+            OutlinedButton(
+                onClick = { },
+                modifier = Modifier.width(150.dp).alignByBaseline().padding(start = 20.dp, end = 20.dp)
+            ) {
+                Text("DONE")
+            }
+        } else {
+            Button(
+                onClick = {
+                    viewModel.onCommit()
+                    isSaved.value = true
+                },
+                modifier = Modifier.width(150.dp).alignByBaseline().padding(start = 20.dp, end = 20.dp)
+            ) {
+                Text("Commit")
+            }
         }
-    }
-}
-
-fun printCommitData(viewModel: ViewModel) {
-    println("Payment Instrument: ${viewModel.paymentInstrument.value}")
-    println("Comment: ${viewModel.comment.value}")
-    println("Category: ${viewModel.category.value}")
-}
-
-data class ViewModel(
-    var paymentInstrument: MutableState<PaymentInstrument>,
-    var comment: MutableState<String>,
-    var category: MutableState<Category>
-) {
-
-    fun onCategoryChange(category: Category) {
-        this.category.value = category
-    }
-
-    fun onPaymentInstrumentChange(paymentInstrument: PaymentInstrument) {
-        this.paymentInstrument.value = paymentInstrument
     }
 }
 
 
 @Composable
 fun PaymentInstrumentDropDown(
-    viewModel: ViewModel,
+    viewModel: MoneyTransferViewModel,
     categories: List<PaymentInstrument>,
 ) {
     val isOpen = remember { mutableStateOf(false) }
@@ -136,7 +134,7 @@ fun PaymentInstrumentDropDown(
 
 @Composable
 fun CommentTextField(
-    viewModel: ViewModel,
+    viewModel: MoneyTransferViewModel,
     modifier: Modifier
 ) {
     val textState = remember { viewModel.comment }
@@ -150,7 +148,7 @@ fun CommentTextField(
 
 @Composable
 fun CategoryDropDown(
-    viewModel: ViewModel,
+    viewModel: MoneyTransferViewModel,
     categories: List<Category>
 ) {
     val isOpen = remember { mutableStateOf(false) }

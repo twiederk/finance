@@ -13,17 +13,16 @@ import androidx.compose.ui.unit.dp
 import com.d20charactersheet.finance.domain.Categories
 import com.d20charactersheet.finance.domain.MoneyTransfer
 import com.d20charactersheet.finance.domain.PaymentInstruments
-import com.d20charactersheet.finance.domain.RawMoneyTransfer
 import com.d20charactersheet.finance.gui.theme.FinanceTheme
-import com.d20charactersheet.finance.import.FileParser
+import com.d20charactersheet.finance.service.MoneyTransferService
 
 
-fun MainWindow(categories: Categories, paymentInstruments: PaymentInstruments) {
-    val rawMoneyTransfers: List<RawMoneyTransfer> =
-        FileParser().readMoneyTransfersFromFile("./src/main/resources/Umsatzanzeige_DE79500105175421442263_20210522.csv")
-    val moneyTransfers: List<MoneyTransfer> =
-        rawMoneyTransfers.filter { it.hashTag.hashTag == "" }.map { it.toMoneyTransfer() }
-
+fun MainWindow(
+    moneyTransfers: List<MoneyTransfer>,
+    moneyTransferService: MoneyTransferService,
+    categories: Categories,
+    paymentInstruments: PaymentInstruments
+) {
     Window(title = "Finance App", size = IntSize(1600, 800)) {
         FinanceTheme {
             Column {
@@ -32,7 +31,12 @@ fun MainWindow(categories: Categories, paymentInstruments: PaymentInstruments) {
                     style = MaterialTheme.typography.h4,
                     modifier = Modifier.padding(20.dp)
                 )
-                MoneyTransferList(moneyTransfers, categories.categories, paymentInstruments.paymentInstruments)
+                MoneyTransferList(
+                    moneyTransfers,
+                    moneyTransferService,
+                    categories.categories,
+                    paymentInstruments.paymentInstruments
+                )
             }
         }
     }

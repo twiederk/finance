@@ -22,33 +22,33 @@ data class RawMoneyTransfer(
     }
 }
 
-data class EntryDate(val entryDate: LocalDate)
-data class ValutaDate(val valutaDate: LocalDate) {
+data class EntryDate(val date: LocalDate)
+data class ValutaDate(val date: LocalDate) {
     override fun toString(): String {
-        return valutaDate.toString()
+        return date.toString()
     }
 }
 
-data class Recipient(val recipient: String)
-data class PostingText(val postingText: String)
-data class IngCategory(val ingCategory: String)
-data class HashTag(val hashTag: String)
-data class ReasonForTransfer(val reasonForTransfer: String) {
+data class Recipient(val name: String)
+data class PostingText(val text: String)
+data class IngCategory(val name: String)
+data class HashTag(val text: String)
+data class ReasonForTransfer(val text: String) {
     override fun toString(): String {
-        return reasonForTransfer
+        return text
     }
 
 }
 
-data class Amount(val amount: Float) {
+data class Amount(val value: Float) {
     override fun toString(): String {
-        return amount.toString()
+        return value.toString()
     }
 }
 
-data class Currency(val currency: String) {
+data class Currency(val name: String) {
     override fun toString(): String {
-        return currency
+        return name
     }
 }
 

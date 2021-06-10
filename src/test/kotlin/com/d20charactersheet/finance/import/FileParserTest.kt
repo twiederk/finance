@@ -15,7 +15,8 @@ class FileParserTest {
     fun importMoneyTransfers_fileWithTwoMoneyTransfers_listOfTwoMoneyTransfers() {
 
         // act
-        val moneyTransfers = FileParser().readMoneyTransfersFromFile("src/test/resources/Umsatzanzeige_02_rows.csv")
+        val moneyTransfers =
+            FileParser().readMoneyTransfersFromFile(arrayOf("src/test/resources/Umsatzanzeige_02_rows.csv"))
 
         // assert
         assertThat(moneyTransfers).hasSize(2)
@@ -38,11 +39,22 @@ class FileParserTest {
     fun importMoneyTransfers_wrongFile_throwIllegalArgumentException() {
 
         // act
-        val throwable = catchThrowable { FileParser().readMoneyTransfersFromFile("src/test/resources/wrongFile.csv") }
+        val throwable =
+            catchThrowable { FileParser().readMoneyTransfersFromFile(arrayOf("src/test/resources/wrongFile.csv")) }
 
         // assert
         assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
             .hasMessage("Can't find money transfers in file")
     }
 
+    @Test
+    fun readMoneyTransfersFromFile_missingFilename_throwIllegalArgumentException() {
+        // arrange
+
+        // act
+        val moneyTransfers = FileParser().readMoneyTransfersFromFile(arrayOf())
+
+        // assert
+        assertThat(moneyTransfers).isEmpty()
+    }
 }

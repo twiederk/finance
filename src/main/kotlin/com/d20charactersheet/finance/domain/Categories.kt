@@ -15,4 +15,6 @@ class Categories(
 
     fun numberOfCategories(): Int = categories.size
 
+    fun findCategoryId(id: Int): Category = categories.find { it.id == id }!!
+
 }

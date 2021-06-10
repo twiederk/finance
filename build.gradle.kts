@@ -7,11 +7,11 @@ plugins {
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("plugin.spring") version "1.4.30"
     kotlin("jvm") version "1.5.10"
-    id("org.jetbrains.compose") version (System.getenv("COMPOSE_TEMPLATE_COMPOSE_VERSION") ?: "0.4.0")
+    id("org.jetbrains.compose") version "0.4.0"
 }
 
 group = "com.d20charactersheet.finance"
-version = "0.5.0"
+version = "0.6.0-SNAPSHOT"
 
 
 repositories {
