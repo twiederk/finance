@@ -18,8 +18,19 @@ class MoneyTransferService(
 
         val categoryRules = mapOf(
             "VISA BAUER-MARKT GMBH" to 19,
+            "IHR BAUER-MARKT SAGT DANKE" to 19,
+            "VISA REWE OEVUENC BEKAR OHG" to 19,
+            "Getraenkemarkt Ostheimer GmbH" to 19,
             "VISA BACKHAUS BICKERT GMBH" to 9,
+            "DER BROTMACHER GMBH" to 9,
             "LichtBlick SE" to 50,
+            "E.ON Energie Deutsch" to 46,
+            "Telekom Deutschland GmbH" to 52,
+            "Telefonica Germany GmbH + Co. OHG" to 40,
+            "Bundesagentur fur Arbeit - Familienkasse" to 67,
+            "VISA AWS EMEA" to 22,
+            "Wuerttembergische Versicherung AG" to 37,
+            "BAYERN-VERSICHERUNG LEBENSVERSICHERUNG AG" to 65,
         )
     }
 

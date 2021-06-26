@@ -98,11 +98,14 @@ fun PaymentInstrumentDropDown(
 
     Box {
         Column {
-            TextField(
-                value = viewModel.paymentInstrument.value.name,
-                onValueChange = { },
-                label = { Text("Payment Instrument") }
-            )
+            val color = DataColorSelector().getPaymentInstrumentColor(viewModel.paymentInstrument.value)
+            Surface(color = color) {
+                TextField(
+                    value = viewModel.paymentInstrument.value.name,
+                    onValueChange = { },
+                    label = { Text("Payment Instrument") }
+                )
+            }
 
             DropdownMenu(
                 expanded = isOpen.value,
@@ -155,11 +158,14 @@ fun CategoryDropDown(
 
     Box {
         Column {
-            TextField(
-                value = viewModel.category.value.name,
-                onValueChange = { },
-                label = { Text("Category") }
-            )
+            val color = DataColorSelector().getCategoryColor(viewModel.category.value)
+            Surface(color = color) {
+                TextField(
+                    value = viewModel.category.value.name,
+                    onValueChange = { },
+                    label = { Text("Category") }
+                )
+            }
 
             DropdownMenu(
                 expanded = isOpen.value,
@@ -189,3 +195,5 @@ fun CategoryDropDown(
         )
     }
 }
+
+
