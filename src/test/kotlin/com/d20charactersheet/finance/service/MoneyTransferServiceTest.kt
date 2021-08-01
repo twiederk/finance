@@ -141,6 +141,21 @@ class MoneyTransferServiceTest {
         val aws = createMoneyTransfer("VISA AWS EMEA")
         val wuerttembergischVersicherung = createMoneyTransfer("Wuerttembergische Versicherung AG")
         val bayernLebensversicherung = createMoneyTransfer("BAYERN-VERSICHERUNG LEBENSVERSICHERUNG AG")
+        val rewe2 = createMoneyTransfer("REWE Oevuenc Bekar oHG")
+        val alldrink = createMoneyTransfer("VISA ALLDRINK GROSSWALLSTAD")
+        val vbba = createMoneyTransfer("vbba - Gewerkschaft Arbeit und Soziales")
+        val bayernVersicherung2 = createMoneyTransfer("BAYERN VERSICHERUNG LEBENSVERSICHERUNG AG")
+        val d20csGooglePlayStore = createMoneyTransfer("Google Payment Ireland Limited")
+        val sOliver = createMoneyTransfer("s.Oliver Bernd Freier GmbH + Co.KG")
+        val d20csHomepage = createMoneyTransfer("IONOS SE")
+        val rossmann = createMoneyTransfer("VISA ROSSMANN 3216")
+        val mueller = createMoneyTransfer("VISA MUELLER MH HANDELS GMB")
+        val mueller2 = createMoneyTransfer("VISA MUELLER GMBH & CO.KG")
+        val dm = createMoneyTransfer("VISA DM-DROGERIE MARKT")
+        val aokBayern = createMoneyTransfer("AOK Bayern")
+        val takko = createMoneyTransfer("VISA TAKKO 1609")
+        val myToys = createMoneyTransfer("myToys.de GmbH")
+        val kirchensteuer = createMoneyTransfer("Kath. Kirchenstiftung Grosswallstad t")
 
         val moneyTransfers = listOf(
             amazon,
@@ -157,7 +172,22 @@ class MoneyTransferServiceTest {
             kindergeld,
             aws,
             wuerttembergischVersicherung,
-            bayernLebensversicherung
+            bayernLebensversicherung,
+            rewe2,
+            alldrink,
+            vbba,
+            bayernVersicherung2,
+            d20csGooglePlayStore,
+            sOliver,
+            d20csHomepage,
+            rossmann,
+            mueller,
+            mueller2,
+            dm,
+            aokBayern,
+            takko,
+            myToys,
+            kirchensteuer
         )
 
         val categories: Categories = mock()
@@ -183,6 +213,21 @@ class MoneyTransferServiceTest {
         assertThat(aws.category.id).isEqualTo(22)
         assertThat(wuerttembergischVersicherung.category.id).isEqualTo(37)
         assertThat(bayernLebensversicherung.category.id).isEqualTo(65)
+        assertThat(rewe2.category.id).isEqualTo(19)
+        assertThat(alldrink.category.id).isEqualTo(19)
+        assertThat(vbba.category.id).isEqualTo(63)
+        assertThat(bayernVersicherung2.category.id).isEqualTo(65)
+        assertThat(d20csGooglePlayStore.category.id).isEqualTo(42)
+        assertThat(sOliver.category.id).isEqualTo(6)
+        assertThat(d20csHomepage.category.id).isEqualTo(114)
+        assertThat(rossmann.category.id).isEqualTo(24)
+        assertThat(mueller.category.id).isEqualTo(24)
+        assertThat(mueller2.category.id).isEqualTo(24)
+        assertThat(dm.category.id).isEqualTo(24)
+        assertThat(aokBayern.category.id).isEqualTo(130)
+        assertThat(takko.category.id).isEqualTo(6)
+        assertThat(myToys.category.id).isEqualTo(6)
+        assertThat(kirchensteuer.category.id).isEqualTo(80)
     }
 
     private fun createMoneyTransfer(recipient: String) = MoneyTransfer(
