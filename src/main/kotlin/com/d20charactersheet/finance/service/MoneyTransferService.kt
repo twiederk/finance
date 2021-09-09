@@ -46,6 +46,7 @@ class MoneyTransferService(
             "VISA TAKKO 1609" to 6,
             "myToys.de GmbH" to 6,
             "Kath. Kirchenstiftung Grosswallstad t" to 80,
+            "VISA AMZNPRIME DE*9H56P3UY5" to 23,
         )
     }
 

@@ -2,34 +2,34 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.4.5"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("plugin.spring") version "1.4.30"
-    kotlin("jvm") version "1.5.10"
-    id("org.jetbrains.compose") version "0.4.0"
+    kotlin("jvm") version "1.5.21"
+    id("org.jetbrains.compose") version "1.0.0-alpha1"
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.2.0"
+version = "1.3.0-SNAPSHOT"
 
 
 repositories {
     jcenter()
     mavenCentral()
+    google()
     maven { url = uri("https://maven.pkg.jetbrains.space/public/p/compose/dev") }
 }
 
 dependencies {
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.assertj:assertj-core:3.19.0")
-    testImplementation(kotlin("test-junit5"))
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.4")
+    testImplementation("org.assertj:assertj-core:3.20.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.21")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
-    testImplementation("com.tngtech.archunit:archunit:0.18.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+    testImplementation("com.tngtech.archunit:archunit:0.21.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
 
 
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc:2.5.4")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation(compose.desktop.currentOs)
