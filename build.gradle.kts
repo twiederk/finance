@@ -2,6 +2,7 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
+    id("org.springframework.boot") version "2.5.4"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("plugin.spring") version "1.4.30"
     kotlin("jvm") version "1.5.21"
@@ -9,7 +10,7 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.3.0-SNAPSHOT"
+version = "1.3.0"
 
 
 repositories {
