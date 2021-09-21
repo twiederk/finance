@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.3.0"
+version = "1.4.0-SNAPSHOT"
 
 
 repositories {
@@ -24,10 +24,9 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test:2.5.4")
     testImplementation("org.assertj:assertj-core:3.20.2")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.21")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.0")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
-    testImplementation("com.tngtech.archunit:archunit:0.21.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    testImplementation("com.tngtech.archunit:archunit-junit5:0.21.0")
 
 
     implementation("org.springframework.boot:spring-boot-starter-jdbc:2.5.4")

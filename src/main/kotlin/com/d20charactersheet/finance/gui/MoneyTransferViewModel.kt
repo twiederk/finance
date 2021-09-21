@@ -26,11 +26,11 @@ class MoneyTransferViewModel(
         this.paymentInstrument.value = paymentInstrument
     }
 
-    fun onCommit() {
+    fun onCommit(): Boolean {
         moneyTransfer.category = category.value
         moneyTransfer.paymentInstrument = paymentInstrument.value
         moneyTransfer.comment = Comment(comment.value)
-        moneyTransferService.save(moneyTransfer)
+        return moneyTransferService.save(moneyTransfer)
     }
 
 }

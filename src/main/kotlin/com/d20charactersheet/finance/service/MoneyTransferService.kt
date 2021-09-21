@@ -4,6 +4,8 @@ import com.d20charactersheet.finance.domain.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.stereotype.Service
+import java.time.format.DateTimeFormatter
+
 
 @Service
 class MoneyTransferService(
@@ -50,21 +52,41 @@ class MoneyTransferService(
         )
     }
 
+    private val formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY")
+
     fun filterNewMoneyTransfers(rawMoneyTransfers: List<RawMoneyTransfer>): List<MoneyTransfer> =
         rawMoneyTransfers.filter { it.hashTag.text == "" }.map { it.toMoneyTransfer() }
 
-    fun save(moneyTransfer: MoneyTransfer) {
+    fun save(moneyTransfer: MoneyTransfer): Boolean {
         println(moneyTransfer)
-        jdbcTemplate.update(
-            "INSERT INTO umsaetze (datum, anzeigetext, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?)",
-            moneyTransfer.valutaDate.date,
-            moneyTransfer.recipient.name,
-            moneyTransfer.amount.value,
-            moneyTransfer.category.id,
-            moneyTransfer.comment.text,
-            moneyTransfer.paymentInstrument.id
-        )
+        if (isDuplicateMoneyTransfer(moneyTransfer)) return false
+        val updatedRows = insertTransaction(moneyTransfer)
+        return updatedRows == 1
     }
+
+    private fun isDuplicateMoneyTransfer(moneyTransfer: MoneyTransfer): Boolean {
+        val formattedDate: String = moneyTransfer.valutaDate.date.format(formatter)
+        val result = jdbcTemplate.queryForObject(
+            """SELECT count(*)
+                |FROM umsaetze
+                |WHERE datum = #${formattedDate}#
+                |AND betrag = ${moneyTransfer.amount.value}
+                |AND anzeigetext = '${moneyTransfer.recipient.name}'""".trimMargin(),
+            Int::class.java,
+        )
+        return result != null && result > 0
+    }
+
+    private fun insertTransaction(moneyTransfer: MoneyTransfer) = jdbcTemplate.update(
+        "INSERT INTO umsaetze (datum, anzeigetext, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?)",
+        moneyTransfer.valutaDate.date,
+        moneyTransfer.recipient.name,
+        moneyTransfer.amount.value,
+        moneyTransfer.category.id,
+        moneyTransfer.comment.text,
+        moneyTransfer.paymentInstrument.id
+    )
+
 
     fun suggestPaymentInstrument(moneyTransfers: List<MoneyTransfer>, paymentInstruments: PaymentInstruments) {
         moneyTransfers.stream().forEach {
