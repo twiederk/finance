@@ -16,9 +16,8 @@ class RawMoneyTransferTest {
             valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
             recipient = Recipient("myRecipient"),
             postingText = PostingText("myPostingText"),
-            ingCategory = IngCategory("myIngCategory"),
-            reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
             hashTag = HashTag("myHashTag"),
+            reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
             amount = Amount(-1.99F),
             currency = Currency("myCurrency")
         ).toMoneyTransfer()

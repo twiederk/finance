@@ -12,7 +12,7 @@ class RawRawMoneyTransferParserTest {
 
         // act
         val rawMoneyTransfer =
-            RawMoneyTransferParser().parseRawMoneyTransfer("11.05.2021;12.05.2021;myRecipient;myPostingText;myIngCategory;myHashTag;myReasonForTransfer;2.000,00;EUR")
+            RawMoneyTransferParser().parseRawMoneyTransfer("11.05.2021;12.05.2021;myRecipient;myPostingText;myHashTag;myReasonForTransfer;2.000,00;EUR")
 
         // assert
         assertThat(rawMoneyTransfer).isNotNull
@@ -20,7 +20,6 @@ class RawRawMoneyTransferParserTest {
         assertThat(rawMoneyTransfer.valutaDate).isEqualTo(ValutaDate(LocalDate.of(2021, 5, 12)))
         assertThat(rawMoneyTransfer.recipient).isEqualTo(Recipient("myRecipient"))
         assertThat(rawMoneyTransfer.postingText).isEqualTo(PostingText("myPostingText"))
-        assertThat(rawMoneyTransfer.ingCategory).isEqualTo(IngCategory("myIngCategory"))
         assertThat(rawMoneyTransfer.hashTag).isEqualTo(HashTag("myHashTag"))
         assertThat(rawMoneyTransfer.reasonForTransfer).isEqualTo(ReasonForTransfer("myReasonForTransfer"))
         assertThat(rawMoneyTransfer.amount).isEqualTo(Amount(2000F))
