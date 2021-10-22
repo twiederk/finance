@@ -17,7 +17,7 @@ class CategoriesDatabaseTest {
         val numberOfCategories = underTest.numberOfCategories()
 
         // assert
-        assertThat(numberOfCategories).isEqualTo(112)
+        assertThat(numberOfCategories).isEqualTo(6)
     }
 
     @Test
@@ -27,10 +27,10 @@ class CategoriesDatabaseTest {
         val categories = underTest.categories
 
         // assert
-        assertThat(categories).hasSize(112)
-        assertThat(categories[0].name).isEqualTo("Abfallgebühren (Müll)")
-        assertThat(categories[1].name).isEqualTo("Abwassergebühren")
-        assertThat(categories[2].name).isEqualTo("Amazon Prime")
+        assertThat(categories).hasSize(6)
+        assertThat(categories[0].name).isEqualTo("Bücher / Musik / Filme")
+        assertThat(categories[1].name).isEqualTo("Freizeit")
+        assertThat(categories[2].name).isEqualTo("Geschenk")
     }
 
 }

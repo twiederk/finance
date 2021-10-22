@@ -24,7 +24,7 @@ class FileParserTest {
         var rawMoneyTransfer = moneyTransfers[0]
         assertThat(rawMoneyTransfer.entryDate).isEqualTo(EntryDate(LocalDate.of(2021, 5, 11)))
         assertThat(rawMoneyTransfer.recipient).isEqualTo(Recipient("VISA ROSSMANN 3216"))
-        assertThat(rawMoneyTransfer.reasonForTransfer).isEqualTo(ReasonForTransfer("NR XXXX 0013 GROSSWALLST KAUFUMSATZ 08.05 124138 ARN74830721128319018498371 Google Pay"))
+        assertThat(rawMoneyTransfer.reasonForTransfer).isEqualTo(ReasonForTransfer("NR XXXX 0013 ORT KAUFUMSATZ 08.05 124138 ARN74830721128319018498371 Google Pay"))
         assertThat(rawMoneyTransfer.amount).isEqualTo(Amount(-13.99F))
 
         rawMoneyTransfer = moneyTransfers[1]

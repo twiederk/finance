@@ -2,10 +2,8 @@
 
 package com.d20charactersheet.finance.gui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
@@ -36,13 +34,15 @@ fun MoneyTransferList(
     Column(
         modifier = Modifier
             .verticalScroll(rememberScrollState())
-            .padding(bottom = 80.dp)
+            .fillMaxWidth()
     ) {
         for (moneyTransfer in moneyTransfers) {
             MoneyTransferRow(moneyTransfer, moneyTransferService, categories, paymentInstruments)
         }
+        EndRow()
     }
 }
+
 
 @Composable
 fun MoneyTransferRow(
@@ -70,6 +70,7 @@ fun MoneyTransferRow(
     }
 }
 
+
 @Composable
 private fun AmountText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
     Text(
@@ -79,6 +80,7 @@ private fun AmountText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
     )
 }
 
+
 @Composable
 private fun RecipientText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
     Text(
@@ -87,10 +89,12 @@ private fun RecipientText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
     )
 }
 
+
 @Composable
 private fun ValutaDateText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
     Text("${moneyTransfer.valutaDate}", modifier.width(100.dp))
 }
+
 
 @Composable
 private fun CommitButton(
@@ -111,6 +115,7 @@ private fun CommitButton(
         Text("Commit")
     }
 }
+
 
 @Composable
 private fun DoneButton(modifier: Modifier) {
@@ -139,3 +144,16 @@ private fun RejectButton(modifier: Modifier) {
 }
 
 
+@Composable
+fun EndRow() {
+    Row {
+        Text(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(25.dp)
+                .background(Color.LightGray),
+            textAlign = TextAlign.Center,
+            text = "End"
+        )
+    }
+}

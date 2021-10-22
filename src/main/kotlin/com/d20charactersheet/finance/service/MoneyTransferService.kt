@@ -49,6 +49,7 @@ class MoneyTransferService(
             "myToys.de GmbH" to 6,
             "Kath. Kirchenstiftung Grosswallstad t" to 80,
             "VISA AMZNPRIME DE*9H56P3UY5" to 23,
+            "KERNenergie GmbH" to 19,
         )
     }
 

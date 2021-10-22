@@ -187,6 +187,7 @@ class MoneyTransferServiceTest {
         val myToys = createMoneyTransfer("myToys.de GmbH")
         val kirchensteuer = createMoneyTransfer("Kath. Kirchenstiftung Grosswallstad t")
         val amazonPrime = createMoneyTransfer("VISA AMZNPRIME DE*9H56P3UY5")
+        val kernenergie = createMoneyTransfer("KERNenergie GmbH")
 
         val moneyTransfers = listOf(
             amazon,
@@ -219,7 +220,8 @@ class MoneyTransferServiceTest {
             takko,
             myToys,
             kirchensteuer,
-            amazonPrime
+            amazonPrime,
+            kernenergie
         )
 
         val categories: Categories = mock()
@@ -261,6 +263,7 @@ class MoneyTransferServiceTest {
         assertThat(myToys.category.id).isEqualTo(6)
         assertThat(kirchensteuer.category.id).isEqualTo(80)
         assertThat(amazonPrime.category.id).isEqualTo(23)
+        assertThat(kernenergie.category.id).isEqualTo(19)
     }
 
     private fun createMoneyTransfer(recipient: String) = MoneyTransfer(
