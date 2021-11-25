@@ -55,8 +55,10 @@ class MoneyTransferService(
 
     private val formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY")
 
-    fun filterNewMoneyTransfers(rawMoneyTransfers: List<RawMoneyTransfer>): List<MoneyTransfer> =
-        rawMoneyTransfers.filter { it.hashTag.text == "" }.map { it.toMoneyTransfer() }
+    fun filterNewMoneyTransfers(rawMoneyTransfers: List<RawMoneyTransfer>): List<MoneyTransfer> {
+        val moneyTransfers = rawMoneyTransfers.filter { it.hashTag.text == "" }.map { it.toMoneyTransfer() }
+        return moneyTransfers.filter { !isDuplicateMoneyTransfer(it) }
+    }
 
     fun save(moneyTransfer: MoneyTransfer): Boolean {
         println(moneyTransfer)
