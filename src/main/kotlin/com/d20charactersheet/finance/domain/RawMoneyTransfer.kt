@@ -7,7 +7,6 @@ data class RawMoneyTransfer(
     val valutaDate: ValutaDate,
     val recipient: Recipient,
     val postingText: PostingText,
-    val hashTag: HashTag,
     val reasonForTransfer: ReasonForTransfer,
     val amount: Amount,
     val currency: Currency
@@ -30,7 +29,6 @@ data class ValutaDate(val date: LocalDate) {
 
 data class Recipient(val name: String)
 data class PostingText(val text: String)
-data class HashTag(val text: String)
 data class ReasonForTransfer(val text: String) {
     override fun toString(): String {
         return text

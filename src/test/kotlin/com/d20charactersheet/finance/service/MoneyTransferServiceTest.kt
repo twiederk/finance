@@ -11,40 +11,6 @@ import java.time.LocalDate
 class MoneyTransferServiceTest {
 
     @Test
-    fun filterNewMoneyTransfers_filledHashTag_dropMoneyTransfer() {
-
-        // arrange
-        val rawMoneyTransfers = listOf(
-            RawMoneyTransfer(
-                entryDate = EntryDate(LocalDate.of(2021, 5, 11)),
-                valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
-                recipient = Recipient("myRecipient"),
-                postingText = PostingText("myPostingText"),
-                hashTag = HashTag("myHashTag"),
-                reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
-                amount = Amount(-1.99F),
-                currency = Currency("myCurrency")
-            ),
-            RawMoneyTransfer(
-                entryDate = EntryDate(LocalDate.of(2021, 5, 11)),
-                valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
-                recipient = Recipient("myRecipient"),
-                postingText = PostingText("myPostingText"),
-                hashTag = HashTag(""),
-                reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
-                amount = Amount(-1.99F),
-                currency = Currency("myCurrency")
-            )
-        )
-
-        // act
-        val moneyTransfers = MoneyTransferService(mock()).filterNewMoneyTransfers(rawMoneyTransfers)
-
-        // assert
-        assertThat(moneyTransfers).hasSize(1)
-    }
-
-    @Test
     fun filterNewMoneyTransfers_alreadyStoredInDatabase_dropMoneyTransfer() {
 
         // arrange
@@ -54,7 +20,6 @@ class MoneyTransferServiceTest {
                 valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
                 recipient = Recipient("myRecipient"),
                 postingText = PostingText("myPostingText"),
-                hashTag = HashTag(""),
                 reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
                 amount = Amount(-1.99F),
                 currency = Currency("myCurrency")
