@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.8.0"
+version = "1.9.0-SNAPSHOT"
 
 
 repositories {

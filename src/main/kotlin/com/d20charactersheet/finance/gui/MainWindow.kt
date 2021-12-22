@@ -23,7 +23,7 @@ fun MainWindow(
     categories: Categories,
     paymentInstruments: PaymentInstruments
 ) {
-    Window(title = "Finance Application (1.8.0)", size = IntSize(1600, 800)) {
+    Window(title = "Finance Application (1.9.0-SNAPSHOT)", size = IntSize(1600, 800)) {
         FinanceTheme {
             Column {
                 Text(

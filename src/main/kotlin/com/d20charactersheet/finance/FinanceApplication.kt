@@ -6,7 +6,9 @@ import com.d20charactersheet.finance.domain.PaymentInstruments
 import com.d20charactersheet.finance.domain.RawMoneyTransfer
 import com.d20charactersheet.finance.gui.MainWindow
 import com.d20charactersheet.finance.import.FileParser
+import com.d20charactersheet.finance.service.CategorySuggestion
 import com.d20charactersheet.finance.service.MoneyTransferService
+import com.d20charactersheet.finance.service.PaymentSuggestion
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -25,11 +27,17 @@ class FinanceApplication : CommandLineRunner {
     @Autowired
     private lateinit var moneyTransferService: MoneyTransferService
 
+    @Autowired
+    private lateinit var paymentSuggestion: PaymentSuggestion
+
+    @Autowired
+    private lateinit var categorySuggestion: CategorySuggestion
+
     override fun run(vararg args: String?) {
         val rawMoneyTransfers: List<RawMoneyTransfer> = FileParser().readMoneyTransfersFromFile(args)
         val moneyTransfers: List<MoneyTransfer> = moneyTransferService.filterNewMoneyTransfers(rawMoneyTransfers)
-        moneyTransferService.suggestPaymentInstrument(moneyTransfers, paymentInstruments)
-        moneyTransferService.suggestCategory(moneyTransfers, categories)
+        paymentSuggestion.suggestPaymentInstrument(moneyTransfers, paymentInstruments)
+        categorySuggestion.suggestCategory(moneyTransfers)
         MainWindow(moneyTransfers, moneyTransferService, categories, paymentInstruments)
     }
 
