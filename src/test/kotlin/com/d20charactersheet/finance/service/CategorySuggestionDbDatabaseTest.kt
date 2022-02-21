@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest
 import java.time.LocalDate
 
 @SpringBootTest
-class CategorySuggestionDbDatabaseTest {
+internal class CategorySuggestionDbDatabaseTest {
 
     @Autowired
     private lateinit var categorySuggestionDb: CategorySuggestionDb
@@ -58,6 +58,7 @@ class CategorySuggestionDbDatabaseTest {
         id = 0,
         valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
         recipient = Recipient(recipient),
+        reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
         amount = Amount(-1.25F),
         EmptyCategory,
         Comment("myComment"),

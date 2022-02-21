@@ -4,6 +4,7 @@ data class MoneyTransfer(
     val id: Int = 0,
     val valutaDate: ValutaDate,
     val recipient: Recipient,
+    val reasonForTransfer: ReasonForTransfer,
     val amount: Amount,
     var category: Category = EmptyCategory,
     var comment: Comment = Comment(""),

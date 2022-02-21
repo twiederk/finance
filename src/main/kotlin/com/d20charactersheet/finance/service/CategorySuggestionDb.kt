@@ -10,13 +10,17 @@ import org.springframework.stereotype.Component
 
 @Component
 class CategorySuggestionDb(
-    @Autowired private val template: JdbcTemplate,
+    @Autowired private val jdbcTemplate: JdbcTemplate,
     @Autowired private val categories: Categories
 ) : CategorySuggestion {
 
-    val categoryRules: Map<String, Int> = template.query("SELECT CategoryText, CategoryId FROM CategoryRule") { rs, _ ->
-        CategoryRule(rs.getString("CategoryText"), rs.getInt("CategoryId"))
-    }.associate { it.text to it.categoryId }
+    private final var categoryRules: Map<String, Int> = mutableMapOf()
+
+    init {
+        val categoryRulesList: MutableList<CategoryRule> =
+            jdbcTemplate.query("SELECT CategoryText, CategoryId FROM CategoryRule", CategoryRuleRowMapper())
+        categoryRules = categoryRulesList.associate { it.text to it.categoryId }
+    }
 
     override fun suggestCategory(moneyTransfers: List<MoneyTransfer>) {
         moneyTransfers.stream().forEach {
@@ -26,7 +30,9 @@ class CategorySuggestionDb(
 
     override fun suggestCategory(moneyTransfer: MoneyTransfer): Category {
         for (categoryRule in categoryRules) {
-            if (moneyTransfer.recipient.name.startsWith(categoryRule.key)) {
+            if (moneyTransfer.recipient.name.startsWith(categoryRule.key)
+                || moneyTransfer.reasonForTransfer.text.startsWith(categoryRule.key)
+            ) {
                 return categories.findCategoryId(categoryRule.value)
             }
         }

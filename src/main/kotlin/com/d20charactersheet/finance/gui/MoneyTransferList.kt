@@ -6,10 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.OutlinedButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -57,7 +54,10 @@ fun MoneyTransferRow(
 
         ValutaDateText(moneyTransfer, Modifier.alignByBaseline())
         PaymentInstrumentDropDown(viewModel, paymentInstruments)
-        RecipientText(moneyTransfer, Modifier.alignByBaseline())
+        Column(Modifier.alignByBaseline()) {
+            RecipientText(moneyTransfer)
+            ReasonForTransferText(moneyTransfer)
+        }
         AmountText(moneyTransfer, Modifier.alignByBaseline())
         CommentTextField(viewModel, Modifier.alignByBaseline())
         CategoryDropDown(viewModel, categories)
@@ -68,8 +68,10 @@ fun MoneyTransferRow(
             TransactionButtonState.Rejected -> RejectButton(Modifier.alignByBaseline())
         }
     }
+    Divider(
+        modifier = Modifier.padding(bottom = 10.dp)
+    )
 }
-
 
 @Composable
 private fun AmountText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
@@ -82,17 +84,28 @@ private fun AmountText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
 
 
 @Composable
-private fun RecipientText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
+private fun RecipientText(moneyTransfer: MoneyTransfer, modifier: Modifier = Modifier) {
     Text(
-        moneyTransfer.recipient.name,
-        modifier.width(250.dp).padding(start = 20.dp, end = 20.dp)
+        text = moneyTransfer.recipient.name,
+        modifier = modifier.width(350.dp).padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
+    )
+}
+
+@Composable
+fun ReasonForTransferText(moneyTransfer: MoneyTransfer, modifier: Modifier = Modifier) {
+    Text(
+        text = moneyTransfer.reasonForTransfer.text,
+        modifier = modifier.width(350.dp).padding(start = 20.dp, end = 20.dp)
     )
 }
 
 
 @Composable
 private fun ValutaDateText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
-    Text("${moneyTransfer.valutaDate}", modifier.width(100.dp))
+    Text(
+        text = "${moneyTransfer.valutaDate}",
+        modifier = modifier.width(100.dp)
+    )
 }
 
 

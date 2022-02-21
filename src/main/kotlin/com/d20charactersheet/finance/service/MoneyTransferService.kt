@@ -20,6 +20,7 @@ class MoneyTransferService(
         return moneyTransfers.filter { !isDuplicateMoneyTransfer(it) }
     }
 
+    @Suppress("BooleanMethodIsAlwaysInverted")
     fun save(moneyTransfer: MoneyTransfer): Boolean {
         println(moneyTransfer)
         if (isDuplicateMoneyTransfer(moneyTransfer)) return false
@@ -41,9 +42,10 @@ class MoneyTransferService(
     }
 
     private fun insertTransaction(moneyTransfer: MoneyTransfer) = jdbcTemplate.update(
-        "INSERT INTO umsaetze (datum, anzeigetext, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?)",
+        "INSERT INTO umsaetze (datum, anzeigetext, verwendungszweck, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?, ?)",
         moneyTransfer.valutaDate.date,
         moneyTransfer.recipient.name,
+        moneyTransfer.reasonForTransfer.text,
         moneyTransfer.amount.value,
         moneyTransfer.category.id,
         moneyTransfer.comment.text,

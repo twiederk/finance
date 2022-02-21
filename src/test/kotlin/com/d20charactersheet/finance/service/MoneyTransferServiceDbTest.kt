@@ -21,6 +21,7 @@ class MoneyTransferServiceDbTest {
         val moneyTransfer = MoneyTransfer(
             valutaDate = ValutaDate(LocalDate.of(2021, 5, 30)),
             recipient = Recipient("testTransaction"),
+            reasonForTransfer = ReasonForTransfer("testReasonForTransfer"),
             amount = Amount(100F),
             category = Category(1, "testCategory"),
             comment = Comment("testComment"),

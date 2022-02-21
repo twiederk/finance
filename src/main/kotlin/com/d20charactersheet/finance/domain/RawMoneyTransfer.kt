@@ -15,6 +15,7 @@ data class RawMoneyTransfer(
         return MoneyTransfer(
             valutaDate = valutaDate,
             recipient = recipient,
+            reasonForTransfer = reasonForTransfer,
             amount = amount
         )
     }
@@ -29,12 +30,7 @@ data class ValutaDate(val date: LocalDate) {
 
 data class Recipient(val name: String)
 data class PostingText(val text: String)
-data class ReasonForTransfer(val text: String) {
-    override fun toString(): String {
-        return text
-    }
-
-}
+data class ReasonForTransfer(val text: String)
 
 data class Amount(val value: Float) {
     override fun toString(): String {

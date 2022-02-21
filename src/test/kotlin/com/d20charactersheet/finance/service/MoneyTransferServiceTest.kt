@@ -43,13 +43,14 @@ class MoneyTransferServiceTest {
             valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
             recipient = Recipient("myRecipient"),
             amount = Amount(-1.25F),
-            Category(1, "myCategory"),
-            Comment("myComment"),
-            PaymentInstrument(1, "myPaymentInstrument")
+            reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
+            category = Category(1, "myCategory"),
+            comment = Comment("myComment"),
+            paymentInstrument = PaymentInstrument(1, "myPaymentInstrument")
         )
         val jdbcTemplate: JdbcTemplate = mock()
         whenever(jdbcTemplate.queryForObject(anyString(), eq(Int::class.java), anyArray<String>())).thenReturn(0)
-        whenever(jdbcTemplate.update(any(), any(), any(), any(), any(), any(), any())).thenReturn(1)
+        whenever(jdbcTemplate.update(any(), any(), any(), any(), any(), any(), any(), any())).thenReturn(1)
 
         // act
         val result = MoneyTransferService(jdbcTemplate).save(moneyTransfer)
@@ -57,9 +58,10 @@ class MoneyTransferServiceTest {
         // assert
         assertThat(result).isTrue
         verify(jdbcTemplate).update(
-            "INSERT INTO umsaetze (datum, anzeigetext, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?)",
+            "INSERT INTO umsaetze (datum, anzeigetext, verwendungszweck, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?, ?)",
             moneyTransfer.valutaDate.date,
             moneyTransfer.recipient.name,
+            moneyTransfer.reasonForTransfer.text,
             moneyTransfer.amount.value,
             moneyTransfer.category.id,
             moneyTransfer.comment.text,
@@ -75,9 +77,10 @@ class MoneyTransferServiceTest {
             valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
             recipient = Recipient("myRecipient"),
             amount = Amount(-1.25F),
-            Category(1, "myCategory"),
-            Comment("myComment"),
-            PaymentInstrument(1, "myPaymentInstrument")
+            reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
+            category = Category(1, "myCategory"),
+            comment = Comment("myComment"),
+            paymentInstrument = PaymentInstrument(1, "myPaymentInstrument")
         )
         val jdbcTemplate: JdbcTemplate = mock()
         whenever(jdbcTemplate.queryForObject(anyString(), eq(Int::class.java))).thenReturn(1)
@@ -88,9 +91,10 @@ class MoneyTransferServiceTest {
         // assert
         assertThat(result).isFalse
         verify(jdbcTemplate, never()).update(
-            "INSERT INTO umsaetze (datum, anzeigetext, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?)",
+            "INSERT INTO umsaetze (datum, anzeigetext, verwendungszweck, betrag, kategorieId, beschreibung, quelleId) VALUES (?, ?, ?, ?, ? ,?, ?)",
             moneyTransfer.valutaDate.date,
             moneyTransfer.recipient.name,
+            moneyTransfer.reasonForTransfer.text,
             moneyTransfer.amount.value,
             moneyTransfer.category.id,
             moneyTransfer.comment.text,

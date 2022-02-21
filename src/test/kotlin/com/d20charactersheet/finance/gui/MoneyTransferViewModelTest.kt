@@ -20,9 +20,10 @@ class MoneyTransferViewModelTest {
             valutaDate = ValutaDate(LocalDate.of(2021, 5, 12)),
             recipient = Recipient("myRecipient"),
             amount = Amount(-1.25F),
-            EmptyCategory,
-            Comment(""),
-            EmptyPaymentInstrument
+            reasonForTransfer = ReasonForTransfer("myReasonForTransfer"),
+            category = EmptyCategory,
+            comment = Comment(""),
+            paymentInstrument = EmptyPaymentInstrument
         )
         val moneyTransferService: MoneyTransferService = mock()
 

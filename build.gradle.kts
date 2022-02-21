@@ -6,12 +6,12 @@ plugins {
     id("org.springframework.boot") version "2.5.4"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     kotlin("plugin.spring") version "1.4.30"
-    kotlin("jvm") version "1.5.21"
-    id("org.jetbrains.compose") version "1.0.0-alpha3"
+    kotlin("jvm") version "1.5.31"
+    id("org.jetbrains.compose") version "1.0.0"
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.9.0"
+version = "1.10.0-SNAPSHOT"
 
 
 repositories {
@@ -21,15 +21,15 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.1")
-    testImplementation("org.assertj:assertj-core:3.21.0")
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.3")
+    testImplementation("org.assertj:assertj-core:3.22.0")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.5.21")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
     testImplementation("com.tngtech.archunit:archunit-junit5:0.22.0")
 
 
-    implementation("org.springframework.boot:spring-boot-starter-jdbc:2.6.1")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc:2.6.3")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation(compose.desktop.currentOs)
@@ -41,7 +41,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "15"
 }
 
 compose.desktop {
