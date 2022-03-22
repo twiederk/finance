@@ -15,15 +15,17 @@ class RawMoneyTransferParser {
         val valutaDate = LocalDate.parse(rawDataList[1], formatter)
         val recipient = rawDataList[2]
         val postingText = rawDataList[3]
-        val reasonForTransfer = rawDataList[4]
-        val amount = rawDataList[5].replace(",", "x").replace(".", "").replace("x", ".").toFloat()
-        val currency = rawDataList[6]
+        val note = rawDataList[4]
+        val reasonForTransfer = rawDataList[5]
+        val amount = rawDataList[6].replace(",", "x").replace(".", "").replace("x", ".").toFloat()
+        val currency = rawDataList[7]
 
         return RawMoneyTransfer(
             EntryDate(entryDate),
             ValutaDate(valutaDate),
             Recipient(recipient),
             PostingText(postingText),
+            Note(note),
             ReasonForTransfer(reasonForTransfer),
             Amount(amount),
             Currency(currency)
