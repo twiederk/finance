@@ -7,7 +7,6 @@ data class RawMoneyTransfer(
     val valutaDate: ValutaDate,
     val recipient: Recipient,
     val postingText: PostingText,
-    val note: Note,
     val reasonForTransfer: ReasonForTransfer,
     val amount: Amount,
     val currency: Currency
@@ -32,7 +31,6 @@ data class ValutaDate(val date: LocalDate) {
 data class Recipient(val name: String)
 data class PostingText(val text: String)
 data class ReasonForTransfer(val text: String)
-data class Note(val text: String)
 
 data class Amount(val value: Float) {
     override fun toString(): String {

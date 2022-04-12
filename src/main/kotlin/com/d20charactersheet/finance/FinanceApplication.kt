@@ -42,7 +42,7 @@ fun main(args: Array<String>) {
     application {
         Window(
             onCloseRequest = ::exitApplication,
-            title = "Finance Application (1.11.0)",
+            title = "Finance Application (1.12.0-SNAPSHOT)",
             state = WindowState(width = 1600.dp, height = 800.dp)
         ) {
             App(moneyTransfers, moneyTransferService, categories, paymentInstruments)

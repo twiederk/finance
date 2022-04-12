@@ -10,6 +10,6 @@ Sortierung;Datum absteigend
 
 In der CSV-Datei finden Sie alle bereits gebuchten Umsätze. Die vorgemerkten Umsätze werden nicht aufgenommen, auch wenn sie in Ihrem Internetbanking angezeigt werden.
 
-Buchung;Valuta;Auftraggeber/Empfänger;Buchungstext;Notiz;Verwendungszweck;Betrag;Währung
-11.05.2021;11.05.2021;VISA ROSSMANN 3216;Lastschrift;meine Notiz;NR XXXX 0013 ORT KAUFUMSATZ 08.05 124138 ARN74830721128319018498371 Google Pay;-13,99;EUR
-12.05.2021;12.05.2021;VISA GOOGLE *GOOGLE PLAY AP;Lastschrift;;NR XXXX 0013 G.CO/HELPPA IE KAUFUMSATZ 08.05 103439 ARN74313301128100074005962;-2,99;EUR
+Buchung;Valuta;Auftraggeber/Empfänger;Buchungstext;Verwendungszweck;Betrag;Währung
+11.05.2021;11.05.2021;VISA ROSSMANN 3216;Lastschrift;NR XXXX 0013 ORT KAUFUMSATZ 08.05 124138 ARN74830721128319018498371 Google Pay;-13,99;EUR
+12.05.2021;12.05.2021;VISA GOOGLE *GOOGLE PLAY AP;Lastschrift;NR XXXX 0013 G.CO/HELPPA IE KAUFUMSATZ 08.05 103439 ARN74313301128100074005962;-2,99;EUR
