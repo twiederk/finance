@@ -5,19 +5,19 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
-class RawRawMoneyTransferParserTest {
+class VolksbankRawMoneyTransferParserTest {
 
     @Test
     fun parseSalesFigure_returnParsedSalesFigures() {
 
         // act
         val rawMoneyTransfer =
-            RawMoneyTransferParser().parseRawMoneyTransfer("11.05.2021;12.05.2021;myRecipient;myPostingText;myReasonForTransfer;2.000,00;EUR")
+            VolksbankRawMoneyTransferParser().parseRawMoneyTransfer("Bezeichnung Auftragskonto;IBAN Auftragskonto;BIC Auftragskonto;Bankname Auftragskonto;30.08.2024;31.08.2024;myRecipient;IBAN Zahlungsbeteiligter;BIC (SWIFT-Code) Zahlungsbeteiligter;myPostingText;myReasonForTransfer;2000,00;EUR;22456,16;;Sonstiges;;;")
 
         // assert
         assertThat(rawMoneyTransfer).isNotNull
-        assertThat(rawMoneyTransfer.entryDate).isEqualTo(EntryDate(LocalDate.of(2021, 5, 11)))
-        assertThat(rawMoneyTransfer.valutaDate).isEqualTo(ValutaDate(LocalDate.of(2021, 5, 12)))
+        assertThat(rawMoneyTransfer.entryDate).isEqualTo(EntryDate(LocalDate.of(2024, 8, 30)))
+        assertThat(rawMoneyTransfer.valutaDate).isEqualTo(ValutaDate(LocalDate.of(2024, 8, 31)))
         assertThat(rawMoneyTransfer.recipient).isEqualTo(Recipient("myRecipient"))
         assertThat(rawMoneyTransfer.postingText).isEqualTo(PostingText("myPostingText"))
         assertThat(rawMoneyTransfer.reasonForTransfer).isEqualTo(ReasonForTransfer("myReasonForTransfer"))

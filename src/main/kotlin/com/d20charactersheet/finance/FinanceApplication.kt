@@ -10,6 +10,7 @@ import com.d20charactersheet.finance.domain.PaymentInstruments
 import com.d20charactersheet.finance.domain.RawMoneyTransfer
 import com.d20charactersheet.finance.gui.App
 import com.d20charactersheet.finance.import.FileParser
+import com.d20charactersheet.finance.import.FileParserFactory
 import com.d20charactersheet.finance.service.CategorySuggestion
 import com.d20charactersheet.finance.service.MoneyTransferService
 import com.d20charactersheet.finance.service.PaymentSuggestionDb
@@ -33,8 +34,10 @@ fun main(args: Array<String>) {
     val paymentSuggestion = applicationContext.getBean(PaymentSuggestionDb::class.java)
     val categorySuggestion = applicationContext.getBean(CategorySuggestion::class.java)
     val categories = applicationContext.getBean(Categories::class.java)
+    val fileParserFactory = applicationContext.getBean(FileParserFactory::class.java)
 
-    val rawMoneyTransfers: List<RawMoneyTransfer> = FileParser().readMoneyTransfersFromFile(args)
+    val fileParser: FileParser = fileParserFactory.getFileParser()
+    val rawMoneyTransfers: List<RawMoneyTransfer> = fileParser.readMoneyTransfersFromFile(args)
     val moneyTransfers: List<MoneyTransfer> = moneyTransferService.filterNewMoneyTransfers(rawMoneyTransfers)
     paymentSuggestion.suggestPaymentInstrument(moneyTransfers, paymentInstruments)
     categorySuggestion.suggestCategory(moneyTransfers)
@@ -42,7 +45,7 @@ fun main(args: Array<String>) {
     application {
         Window(
             onCloseRequest = ::exitApplication,
-            title = "Finance Application (1.12.0)",
+            title = "Finance Application (1.13.0-SNAPSHOT)",
             state = WindowState(width = 1600.dp, height = 800.dp)
         ) {
             App(moneyTransfers, moneyTransferService, categories, paymentInstruments)

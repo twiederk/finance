@@ -9,14 +9,14 @@ import org.assertj.core.api.Assertions.catchThrowable
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
 
-class FileParserTest {
+class IngFileParserTest {
 
     @Test
     fun importMoneyTransfers_fileWithTwoMoneyTransfers_listOfTwoMoneyTransfers() {
 
         // act
         val moneyTransfers =
-            FileParser().readMoneyTransfersFromFile(arrayOf("src/test/resources/Umsatzanzeige_02_rows.csv"))
+            IngFileParser().readMoneyTransfersFromFile(arrayOf("src/test/resources/Umsatzanzeige_02_rows.csv"))
 
         // assert
         assertThat(moneyTransfers).hasSize(2)
@@ -40,7 +40,7 @@ class FileParserTest {
 
         // act
         val throwable =
-            catchThrowable { FileParser().readMoneyTransfersFromFile(arrayOf("src/test/resources/wrongFile.csv")) }
+            catchThrowable { IngFileParser().readMoneyTransfersFromFile(arrayOf("src/test/resources/wrongFile.csv")) }
 
         // assert
         assertThat(throwable).isInstanceOf(IllegalArgumentException::class.java)
@@ -49,10 +49,9 @@ class FileParserTest {
 
     @Test
     fun readMoneyTransfersFromFile_missingFilename_throwIllegalArgumentException() {
-        // arrange
 
         // act
-        val moneyTransfers = FileParser().readMoneyTransfersFromFile(arrayOf())
+        val moneyTransfers = IngFileParser().readMoneyTransfersFromFile(arrayOf())
 
         // assert
         assertThat(moneyTransfers).isEmpty()
