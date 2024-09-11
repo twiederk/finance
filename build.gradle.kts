@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.13.0-SNAPSHOT"
+version = "1.13.0"
 
 
 repositories {
