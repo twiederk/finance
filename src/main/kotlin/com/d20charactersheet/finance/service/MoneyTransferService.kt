@@ -13,7 +13,7 @@ class MoneyTransferService(
     @Autowired private val jdbcTemplate: JdbcTemplate
 ) {
 
-    private val formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY")
+    private val formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy")
 
     fun filterNewMoneyTransfers(rawMoneyTransfers: List<RawMoneyTransfer>): List<MoneyTransfer> {
         val moneyTransfers = rawMoneyTransfers.map { it.toMoneyTransfer() }
@@ -30,12 +30,13 @@ class MoneyTransferService(
 
     private fun isDuplicateMoneyTransfer(moneyTransfer: MoneyTransfer): Boolean {
         val formattedDate: String = moneyTransfer.valutaDate.date.format(formatter)
+        val sql = """SELECT count(*)
+            |FROM umsaetze
+            |WHERE datum = #${formattedDate}#
+            |AND betrag = ${moneyTransfer.amount.value}
+            |AND anzeigetext = '${moneyTransfer.recipient.name}'""".trimMargin()
         val result = jdbcTemplate.queryForObject(
-            """SELECT count(*)
-                |FROM umsaetze
-                |WHERE datum = #${formattedDate}#
-                |AND betrag = ${moneyTransfer.amount.value}
-                |AND anzeigetext = '${moneyTransfer.recipient.name}'""".trimMargin(),
+            sql,
             Int::class.java,
         )
         return result != null && result > 0

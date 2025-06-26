@@ -18,12 +18,9 @@ import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
 
-
 @SpringBootApplication
 class FinanceApplication : CommandLineRunner {
-
     override fun run(vararg args: String?) {}
-
 }
 
 fun main(args: Array<String>) {
@@ -45,11 +42,10 @@ fun main(args: Array<String>) {
     application {
         Window(
             onCloseRequest = ::exitApplication,
-            title = "Finance Application (1.13.0)",
+            title = "Finance Application (1.14.0)",
             state = WindowState(width = 1600.dp, height = 800.dp)
         ) {
             App(moneyTransfers, moneyTransferService, categories, paymentInstruments)
         }
     }
 }
-
