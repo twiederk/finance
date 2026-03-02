@@ -2,15 +2,15 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.5.4"
-    id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("plugin.spring") version "1.8.22"
-    kotlin("jvm") version "1.8.22"
-    id("org.jetbrains.compose") version "1.5.0"
+    id("org.springframework.boot") version "3.1.6"
+    id("io.spring.dependency-management") version "1.1.0"
+    kotlin("plugin.spring") version "1.9.10"
+    kotlin("jvm") version "1.9.10"
+    id("org.jetbrains.compose") version "1.6.0"
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.14.0"
+version = "1.15.0"
 
 
 repositories {
@@ -20,16 +20,14 @@ repositories {
 }
 
 dependencies {
-    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.5")
-    testImplementation("org.assertj:assertj-core:3.22.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.8.22")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:4.0.0")
-    testImplementation("com.tngtech.archunit:archunit-junit5:0.23.1")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.10")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
 
-    implementation("org.jetbrains.kotlin:kotlin-reflect:1.8.22")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc:2.6.5")
+    implementation("org.jetbrains.kotlin:kotlin-reflect:1.9.10")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10")
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation(compose.desktop.currentOs)
     implementation("net.sf.ucanaccess:ucanaccess:5.0.1")
 }
@@ -38,8 +36,14 @@ tasks.test {
     useJUnitPlatform()
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "15"
+    kotlinOptions.jvmTarget = "17"
 }
 
 compose.desktop {

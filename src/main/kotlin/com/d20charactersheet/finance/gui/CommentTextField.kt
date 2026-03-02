@@ -1,7 +1,6 @@
 package com.d20charactersheet.finance.gui
 
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
@@ -19,6 +18,6 @@ fun CommentTextField(
         value = textState.value,
         onValueChange = { textState.value = it },
         label = { Text("Comment") },
-        modifier = modifier.width(250.dp).padding(start = 20.dp, end = 20.dp)
+        modifier = modifier.padding(start = 20.dp, end = 20.dp)
     )
 }

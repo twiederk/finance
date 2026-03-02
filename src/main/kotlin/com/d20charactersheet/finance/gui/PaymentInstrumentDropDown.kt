@@ -6,7 +6,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -19,10 +23,11 @@ import com.d20charactersheet.finance.domain.PaymentInstrument
 fun PaymentInstrumentDropDown(
     viewModel: MoneyTransferViewModel,
     categories: List<PaymentInstrument>,
+    modifier: Modifier = Modifier
 ) {
     val isOpen = remember { mutableStateOf(false) }
 
-    Box {
+    Box(modifier = modifier) {
         Column {
             val color = DataColorSelector().getPaymentInstrumentColor(viewModel.paymentInstrument.value)
             Surface(color = color) {

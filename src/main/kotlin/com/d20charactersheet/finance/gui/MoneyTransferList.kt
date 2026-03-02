@@ -3,10 +3,19 @@
 package com.d20charactersheet.finance.gui
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.horizontalScroll
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.Divider
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -48,24 +57,34 @@ fun MoneyTransferRow(
     categories: List<Category>,
     paymentInstruments: List<PaymentInstrument>
 ) {
-    Row(Modifier.padding(start = 20.dp, end = 20.dp, bottom = 10.dp)) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .horizontalScroll(rememberScrollState())
+            .padding(start = 20.dp, end = 20.dp, bottom = 10.dp)
+    ) {
         val transactionButtonState = remember { mutableStateOf(TransactionButtonState.Commit) }
         val viewModel = MoneyTransferViewModel(moneyTransfer, moneyTransferService)
 
-        ValutaDateText(moneyTransfer, Modifier.alignByBaseline())
-        PaymentInstrumentDropDown(viewModel, paymentInstruments)
-        Column(Modifier.alignByBaseline()) {
+        ValutaDateText(moneyTransfer, Modifier.alignByBaseline().weight(1f))
+        PaymentInstrumentDropDown(viewModel, paymentInstruments, Modifier.weight(1.2f))
+        Column(Modifier.alignByBaseline().weight(1.8f)) {
             RecipientText(moneyTransfer)
             ReasonForTransferText(moneyTransfer)
         }
-        AmountText(moneyTransfer, Modifier.alignByBaseline())
-        CommentTextField(viewModel, Modifier.alignByBaseline())
-        CategoryDropDown(viewModel, categories)
+        AmountText(moneyTransfer, Modifier.alignByBaseline().weight(0.8f))
+        CommentTextField(viewModel, Modifier.alignByBaseline().weight(1.5f))
+        CategoryDropDown(viewModel, categories, Modifier.weight(1.2f))
 
         when (transactionButtonState.value) {
-            TransactionButtonState.Commit -> CommitButton(viewModel, transactionButtonState, Modifier.alignByBaseline())
-            TransactionButtonState.Done -> DoneButton(Modifier.alignByBaseline())
-            TransactionButtonState.Rejected -> RejectButton(Modifier.alignByBaseline())
+            TransactionButtonState.Commit -> CommitButton(
+                viewModel,
+                transactionButtonState,
+                Modifier.alignByBaseline().weight(0.9f)
+            )
+
+            TransactionButtonState.Done -> DoneButton(Modifier.alignByBaseline().weight(0.9f))
+            TransactionButtonState.Rejected -> RejectButton(Modifier.alignByBaseline().weight(0.9f))
         }
     }
     Divider(
@@ -77,7 +96,7 @@ fun MoneyTransferRow(
 private fun AmountText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
     Text(
         text = AmountFormat().format(moneyTransfer.amount),
-        modifier = modifier.width(100.dp),
+        modifier = modifier,
         textAlign = TextAlign.End
     )
 }
@@ -87,7 +106,7 @@ private fun AmountText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
 private fun RecipientText(moneyTransfer: MoneyTransfer, modifier: Modifier = Modifier) {
     Text(
         text = moneyTransfer.recipient.name,
-        modifier = modifier.width(350.dp).padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
+        modifier = modifier.padding(start = 20.dp, end = 20.dp, bottom = 20.dp)
     )
 }
 
@@ -95,7 +114,7 @@ private fun RecipientText(moneyTransfer: MoneyTransfer, modifier: Modifier = Mod
 fun ReasonForTransferText(moneyTransfer: MoneyTransfer, modifier: Modifier = Modifier) {
     Text(
         text = moneyTransfer.reasonForTransfer.text,
-        modifier = modifier.width(350.dp).padding(start = 20.dp, end = 20.dp)
+        modifier = modifier.padding(start = 20.dp, end = 20.dp)
     )
 }
 
@@ -104,7 +123,7 @@ fun ReasonForTransferText(moneyTransfer: MoneyTransfer, modifier: Modifier = Mod
 private fun ValutaDateText(moneyTransfer: MoneyTransfer, modifier: Modifier) {
     Text(
         text = "${moneyTransfer.valutaDate}",
-        modifier = modifier.width(100.dp)
+        modifier = modifier
     )
 }
 
@@ -123,7 +142,7 @@ private fun CommitButton(
                 transactionButtonState.value = TransactionButtonState.Rejected
             }
         },
-        modifier = modifier.width(150.dp).padding(start = 20.dp, end = 20.dp)
+        modifier = modifier.padding(start = 20.dp, end = 20.dp)
     ) {
         Text("Commit")
     }
@@ -134,7 +153,7 @@ private fun CommitButton(
 private fun DoneButton(modifier: Modifier) {
     OutlinedButton(
         onClick = { },
-        modifier = modifier.width(150.dp).padding(start = 20.dp, end = 20.dp),
+        modifier = modifier.padding(start = 20.dp, end = 20.dp),
         enabled = false
     ) {
         Text("DONE")
@@ -145,7 +164,7 @@ private fun DoneButton(modifier: Modifier) {
 private fun RejectButton(modifier: Modifier) {
     Button(
         onClick = { },
-        modifier = modifier.width(150.dp).padding(start = 20.dp, end = 20.dp),
+        modifier = modifier.padding(start = 20.dp, end = 20.dp),
         colors = ButtonDefaults.buttonColors(
             disabledBackgroundColor = Color.Red,
             disabledContentColor = Color.White
