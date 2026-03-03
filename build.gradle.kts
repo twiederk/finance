@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.15.0"
+version = "1.15.1-SNAPSHOT"
 
 
 repositories {
@@ -29,7 +29,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.9.10")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation(compose.desktop.currentOs)
-    implementation("net.sf.ucanaccess:ucanaccess:5.0.1")
+    implementation("io.github.spannm:ucanaccess:5.1.5")
 }
 
 tasks.test {
@@ -38,12 +38,12 @@ tasks.test {
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(17))
+        languageVersion.set(JavaLanguageVersion.of(19))
     }
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "17"
+    kotlinOptions.jvmTarget = "19"
 }
 
 compose.desktop {
