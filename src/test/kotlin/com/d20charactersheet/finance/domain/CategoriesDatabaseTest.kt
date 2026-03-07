@@ -17,7 +17,7 @@ class CategoriesDatabaseTest {
         val numberOfCategories = underTest.numberOfCategories()
 
         // assert
-        assertThat(numberOfCategories).isEqualTo(7)
+        assertThat(numberOfCategories).isEqualTo(8)
     }
 
     @Test
@@ -27,10 +27,16 @@ class CategoriesDatabaseTest {
         val categories = underTest.categories
 
         // assert
-        assertThat(categories).hasSize(7)
-        assertThat(categories[0].name).isEqualTo("Bücher / Musik / Filme")
-        assertThat(categories[1].name).isEqualTo("Freizeit")
-        assertThat(categories[2].name).isEqualTo("Geschenk")
+        assertThat(categories.map { it.name }).containsExactlyInAnyOrder(
+            "Bücher / Musik / Filme",
+            "Freizeit",
+            "Geschenk",
+            "Spielzeug",
+            "Klamotten",
+            "Streaming",
+            "Lebensmittel",
+            "Gehalt Torsten",
+        )
     }
 
 }

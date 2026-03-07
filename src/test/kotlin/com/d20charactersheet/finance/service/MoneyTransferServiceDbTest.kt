@@ -25,7 +25,7 @@ class MoneyTransferServiceDbTest {
             amount = Amount(100F),
             category = Category(1, "testCategory"),
             comment = Comment("testComment"),
-            paymentInstrument = PaymentInstrument(1, "testPayment")
+            paymentInstrument = PaymentInstrument(4, "testPayment")
         )
         underTest.save(moneyTransfer)
 

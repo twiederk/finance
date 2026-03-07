@@ -17,7 +17,7 @@ class PaymentInstrumentsDatabaseTest {
         val numberOfPaymentInstruments = underTest.numberOfPaymentInstruments()
 
         // assert
-        assertThat(numberOfPaymentInstruments).isEqualTo(10)
+        assertThat(numberOfPaymentInstruments).isEqualTo(3)
     }
 
     @Test
@@ -27,10 +27,11 @@ class PaymentInstrumentsDatabaseTest {
         val paymentInstruments = underTest.paymentInstruments
 
         // assert
-        assertThat(paymentInstruments).hasSize(10)
-        assertThat(paymentInstruments[0].name).isEqualTo("Bargeld")
-        assertThat(paymentInstruments[1].name).isEqualTo("d20cs Konto")
-        assertThat(paymentInstruments[2].name).isEqualTo("Girokarte 1")
+        assertThat(paymentInstruments.map { it.name }).containsExactly(
+            "d20cs Konto",
+            "Geschäftskonto",
+            "Nebenkostenkonto",
+        )
     }
 
 }

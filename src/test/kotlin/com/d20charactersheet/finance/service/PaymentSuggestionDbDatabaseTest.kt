@@ -14,7 +14,7 @@ internal class PaymentSuggestionDbDatabaseTest {
     @Test
     internal fun init_initialization_loadPaymentSuggestionRulesFromDatabase() {
         // assert
-        assertThat(paymentSuggestionDb.paymentInstrumentRules).hasSize(3)
+        assertThat(paymentSuggestionDb.paymentInstrumentRules).hasSize(1)
     }
 
 }

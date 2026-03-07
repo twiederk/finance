@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.d20charactersheet.finance"
-version = "1.15.1"
+version = "1.16.0-SNAPSHOT"
 
 
 repositories {
@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation("org.assertj:assertj-core:3.27.7")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5:1.9.10")
     testImplementation("org.mockito.kotlin:mockito-kotlin:4.1.0")
 
@@ -30,6 +30,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation(compose.desktop.currentOs)
     implementation("io.github.spannm:ucanaccess:5.1.5")
+    implementation("org.apache.poi:poi-ooxml:5.5.1")
 }
 
 tasks.test {
