@@ -11,7 +11,11 @@ import com.d20charactersheet.finance.domain.RawMoneyTransfer
 import com.d20charactersheet.finance.gui.App
 import com.d20charactersheet.finance.import.FileParser
 import com.d20charactersheet.finance.import.FileParserFactory
-import com.d20charactersheet.finance.service.*
+import com.d20charactersheet.finance.service.CategorySuggestion
+import com.d20charactersheet.finance.service.ExcelExportService
+import com.d20charactersheet.finance.service.MoneyTransferService
+import com.d20charactersheet.finance.service.MonthlyStatementService
+import com.d20charactersheet.finance.service.PaymentSuggestionDb
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.builder.SpringApplicationBuilder
@@ -42,7 +46,7 @@ fun main(args: Array<String>) {
     application {
         Window(
             onCloseRequest = ::exitApplication,
-            title = "Finance Application (1.16.0-SNAPSHOT)",
+            title = "Finance Application (1.16.0)",
             state = WindowState(width = 1600.dp, height = 800.dp)
         ) {
             App(
