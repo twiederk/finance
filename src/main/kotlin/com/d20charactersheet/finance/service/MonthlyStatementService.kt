@@ -28,6 +28,7 @@ class MonthlyStatementService(
             |Kategorie
             |INNER JOIN Umsaetze ON Kategorie.Id = Umsaetze.KategorieId
             |WHERE Umsaetze.datum >= #${startDate}# AND Umsaetze.datum <= #${endDate}#
+            |AND QuelleId = ${PaymentSuggestionDb.DEFAULT_PAYMENT_INSTRUMENT_ID}
             |GROUP BY Kategorie.Id, Kategorie.Kategorie, Kategorie.Typ""".trimMargin()
         val result = jdbcTemplate.queryForRowSet(sql)
 
