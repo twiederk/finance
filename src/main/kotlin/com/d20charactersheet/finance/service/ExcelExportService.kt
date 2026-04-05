@@ -1,6 +1,11 @@
 package com.d20charactersheet.finance.service
 
-import com.d20charactersheet.finance.domain.*
+import com.d20charactersheet.finance.domain.CategoryType
+import com.d20charactersheet.finance.domain.Critically
+import com.d20charactersheet.finance.domain.ExportMessage
+import com.d20charactersheet.finance.domain.ExportSummary
+import com.d20charactersheet.finance.domain.MonthlyStatement
+import com.d20charactersheet.finance.domain.MonthlyStatements
 import org.apache.poi.ss.usermodel.CellType
 import org.apache.poi.xssf.usermodel.XSSFRow
 import org.apache.poi.xssf.usermodel.XSSFSheet
@@ -96,7 +101,12 @@ class ExcelExportService(
     ) {
         val excelCategory = categoryIdToRowMapping[statement.categoryId]
         if (excelCategory == null) {
-            messages.add(ExportMessage(Critically.ERROR, "*** No row found for ${statement.categoryName} (Id: ${statement.categoryId}) ***"))
+            messages.add(
+                ExportMessage(
+                    Critically.ERROR,
+                    "*** Keine Zeile gefunden für ${statement.categoryName} (Id: ${statement.categoryId}) ***"
+                )
+            )
             return
         }
         val rowIndex = excelCategory.first
@@ -114,12 +124,21 @@ class ExcelExportService(
         total: Double
     ): ExportMessage {
         return if (total < 0.0) {
-            ExportMessage(Critically.WARN, "Assigned ${statement.categoryName} (Id: ${statement.categoryId}) to ${excelCategory.second} (Row: ${rowIndex + 1}): $total => check negative value!")
+            ExportMessage(
+                Critically.WARN,
+                "Zugewiesen ${statement.categoryName} (Id: ${statement.categoryId}) zu ${excelCategory.second} (Zeile: ${rowIndex + 1}): $total => bitte negativen Wert prüfen!"
+            )
         } else {
             if (statement.categoryName == excelCategory.second) {
-                ExportMessage(Critically.INFO, "Assigned ${statement.categoryName} (Id: ${statement.categoryId}) to ${excelCategory.second} (Row: ${rowIndex + 1}): $total")
+                ExportMessage(
+                    Critically.INFO,
+                    "Zugewiesen ${statement.categoryName} (Id: ${statement.categoryId}) zu ${excelCategory.second} (Zeile: ${rowIndex + 1}): $total"
+                )
             } else {
-                ExportMessage(Critically.WARN, "Assigned ${statement.categoryName} (Id: ${statement.categoryId}) to ${excelCategory.second} (Row: ${rowIndex + 1}): $total => check different category name!")
+                ExportMessage(
+                    Critically.WARN,
+                    "Zugewiesen ${statement.categoryName} (Id: ${statement.categoryId}) zu ${excelCategory.second} (Zeile: ${rowIndex + 1}): $total => bitte unterschiedlichen Kategorienamen prüfen!"
+                )
             }
         }
     }
@@ -143,7 +162,7 @@ class ExcelExportService(
         return if (nameCell.cellType == CellType.STRING) {
             nameCell.stringCellValue
         } else {
-            "Missing excel category name"
+            "Fehlender Excel-Kategoriename"
         }
 
     }
