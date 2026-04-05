@@ -126,18 +126,18 @@ class ExcelExportService(
         return if (total < 0.0) {
             ExportMessage(
                 Critically.WARN,
-                "Zugewiesen [${statement.categoryName}] (Id: ${statement.categoryId}) zu ${excelCategory.second} (Zeile: ${rowIndex + 1}): $total => bitte negativen Wert prüfen!"
+                "Zugewiesen [${statement.categoryName}] (Id: ${statement.categoryId}) zu [${excelCategory.second}] (Zeile: ${rowIndex + 1}): $total => bitte negativen Wert prüfen!"
             )
         } else {
             if (statement.categoryName == excelCategory.second) {
                 ExportMessage(
                     Critically.INFO,
-                    "Zugewiesen [${statement.categoryName}] (Id: ${statement.categoryId}) zu ${excelCategory.second} (Zeile: ${rowIndex + 1}): $total"
+                    "Zugewiesen [${statement.categoryName}] (Id: ${statement.categoryId}) zu [${excelCategory.second}] (Zeile: ${rowIndex + 1}): $total"
                 )
             } else {
                 ExportMessage(
                     Critically.WARN,
-                    "Zugewiesen [${statement.categoryName}] (Id: ${statement.categoryId}) zu ${excelCategory.second} (Zeile: ${rowIndex + 1}): $total => bitte unterschiedlichen Kategorienamen prüfen!"
+                    "Zugewiesen [${statement.categoryName}] (Id: ${statement.categoryId}) zu [${excelCategory.second}] (Zeile: ${rowIndex + 1}): $total => bitte unterschiedlichen Kategorienamen prüfen!"
                 )
             }
         }
