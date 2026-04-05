@@ -143,6 +143,7 @@ fun ExportToExcelTab(
             ) {
                 messages?.sortedWith(ExportMessageComparator())?.forEach { message ->
                     MessageRow(message)
+                    println(message.message)
                 }
             }
         }
