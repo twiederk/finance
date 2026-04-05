@@ -17,7 +17,7 @@ class CategoriesDatabaseTest {
         val numberOfCategories = underTest.numberOfCategories()
 
         // assert
-        assertThat(numberOfCategories).isEqualTo(8)
+        assertThat(numberOfCategories).isEqualTo(9)
     }
 
     @Test
@@ -28,6 +28,7 @@ class CategoriesDatabaseTest {
 
         // assert
         assertThat(categories.map { it.name }).containsExactlyInAnyOrder(
+            "Abwassergebühren",
             "Bücher / Musik / Filme",
             "Freizeit",
             "Geschenk",

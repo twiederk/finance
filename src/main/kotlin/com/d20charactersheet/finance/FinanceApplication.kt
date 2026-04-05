@@ -46,7 +46,7 @@ fun main(args: Array<String>) {
     application {
         Window(
             onCloseRequest = ::exitApplication,
-            title = "Finance Application (1.16.0)",
+            title = "Finance Application (1.18.0)",
             state = WindowState(width = 1600.dp, height = 800.dp)
         ) {
             App(
