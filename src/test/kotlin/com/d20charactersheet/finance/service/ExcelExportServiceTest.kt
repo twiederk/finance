@@ -63,21 +63,24 @@ class ExcelExportServiceTest {
         assertThat(exportSummary.messages).containsExactlyInAnyOrder(
             ExportMessage(
                 Critically.WARN,
-                "Zugewiesen Bücher / Musik / Filme (Id: 1) zu Bücher / Musik (Zeile: 139): 30.0 => bitte unterschiedlichen Kategorienamen prüfen!"
+                "Zugewiesen [Bücher / Musik / Filme] (Id: 1) zu Bücher / Musik (Zeile: 139): 30.0 => bitte unterschiedlichen Kategorienamen prüfen!"
             ),
-            ExportMessage(Critically.INFO, "Zugewiesen Freizeit (Id: 2) zu Freizeit (Zeile: 137): 20.1"),
+            ExportMessage(Critically.INFO, "Zugewiesen [Freizeit] (Id: 2) zu Freizeit (Zeile: 137): 20.1"),
             ExportMessage(
                 Critically.WARN,
-                "Zugewiesen Geschenk (Id: 3) zu Geschenke / Party (Zeile: 138): 23.29 => bitte unterschiedlichen Kategorienamen prüfen!"
+                "Zugewiesen [Geschenk] (Id: 3) zu Geschenke / Party (Zeile: 138): 23.29 => bitte unterschiedlichen Kategorienamen prüfen!"
             ),
             ExportMessage(
                 Critically.WARN,
-                "Zugewiesen Klamotten (Id: 30) zu Klamotten (Zeile: 113): -90.93 => bitte negativen Wert prüfen!"
+                "Zugewiesen [Klamotten] (Id: 30) zu Klamotten (Zeile: 113): -90.93 => bitte negativen Wert prüfen!"
             ),
-            ExportMessage(Critically.INFO, "Zugewiesen Streaming (Id: 98) zu Streaming (Zeile: 140): 4.95"),
-            ExportMessage(Critically.INFO, "Zugewiesen Lebensmittel (Id: 99) zu Lebensmittel (Zeile: 104): 612.78"),
-            ExportMessage(Critically.INFO, "Zugewiesen Gehalt Torsten (Id: 100) zu Gehalt Torsten (Zeile: 3): 1000.0"),
-            ExportMessage(Critically.ERROR, "*** Keine Zeile gefunden für Spielzeug (Id: 8) ***"),
+            ExportMessage(Critically.INFO, "Zugewiesen [Streaming] (Id: 98) zu Streaming (Zeile: 140): 4.95"),
+            ExportMessage(Critically.INFO, "Zugewiesen [Lebensmittel] (Id: 99) zu Lebensmittel (Zeile: 104): 612.78"),
+            ExportMessage(
+                Critically.INFO,
+                "Zugewiesen [Gehalt Torsten] (Id: 100) zu Gehalt Torsten (Zeile: 3): 1000.0"
+            ),
+            ExportMessage(Critically.ERROR, "*** Keine Zeile gefunden für [Spielzeug] (Id: 8) ***"),
         )
 
 
@@ -172,7 +175,7 @@ class ExcelExportServiceTest {
         assertThat(successMessage).isEqualTo(
             ExportMessage(
                 Critically.INFO,
-                "Zugewiesen Spielzeug (Id: 1) zu Spielzeug (Zeile: 101): 30.0"
+                "Zugewiesen [Spielzeug] (Id: 1) zu Spielzeug (Zeile: 101): 30.0"
             )
         )
     }
@@ -191,7 +194,7 @@ class ExcelExportServiceTest {
         assertThat(successMessage).isEqualTo(
             ExportMessage(
                 Critically.WARN,
-                "Zugewiesen Spielzeug (Id: 1) zu Lebensmittel (Zeile: 101): 30.0 => bitte unterschiedlichen Kategorienamen prüfen!"
+                "Zugewiesen [Spielzeug] (Id: 1) zu Lebensmittel (Zeile: 101): 30.0 => bitte unterschiedlichen Kategorienamen prüfen!"
             )
         )
     }
@@ -210,7 +213,7 @@ class ExcelExportServiceTest {
         assertThat(successMessage).isEqualTo(
             ExportMessage(
                 Critically.WARN,
-                "Zugewiesen Spielzeug (Id: 1) zu Spielzeug (Zeile: 101): -30.0 => bitte negativen Wert prüfen!"
+                "Zugewiesen [Spielzeug] (Id: 1) zu Spielzeug (Zeile: 101): -30.0 => bitte negativen Wert prüfen!"
             )
         )
     }
