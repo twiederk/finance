@@ -1,6 +1,12 @@
 package com.d20charactersheet.finance.import
 
-import com.d20charactersheet.finance.domain.*
+import com.d20charactersheet.finance.domain.Amount
+import com.d20charactersheet.finance.domain.Currency
+import com.d20charactersheet.finance.domain.EntryDate
+import com.d20charactersheet.finance.domain.PostingText
+import com.d20charactersheet.finance.domain.ReasonForTransfer
+import com.d20charactersheet.finance.domain.Recipient
+import com.d20charactersheet.finance.domain.ValutaDate
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import java.time.LocalDate
@@ -12,7 +18,7 @@ class IngRawMoneyTransferParserTest {
 
         // act
         val rawMoneyTransfer =
-            IngRawMoneyTransferParser().parseRawMoneyTransfer("11.05.2021;12.05.2021;myRecipient;myPostingText;myReasonForTransfer;2.000,00;EUR")
+            IngRawMoneyTransferParser().parseRawMoneyTransfer("11.05.2021;12.05.2021;myRecipient;myPostingText;myReasonForTransfer;myReference;2.000,00;EUR")
 
         // assert
         assertThat(rawMoneyTransfer).isNotNull
